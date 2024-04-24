@@ -70,6 +70,8 @@ public enum ResponseFormat: String, Codable, Equatable, CaseIterable {
             switch self {
             case .mpga:
                 contentType += Self.mp3.rawValue
+            case .m4a:
+                contentType += Self.mpeg.rawValue
             default:
                 contentType += self.rawValue
             }
