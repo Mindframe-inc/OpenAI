@@ -25,8 +25,9 @@ final public class OpenAI: OpenAIProtocol {
         
         /// Default request timeout
         public let timeoutInterval: TimeInterval
+        public let pathPrefix: String?
         
-        public init(token: String, organizationIdentifier: String? = nil, host: String = "api.openai.com", timeoutInterval: TimeInterval = 60.0) {
+        public init(token: String, organizationIdentifier: String? = nil, host: String = "api.openai.com", pathPrefix: String? = nil, timeoutInterval: TimeInterval = 60.0) {
             self.token = token
             self.organizationIdentifier = organizationIdentifier
             self.host = host
@@ -197,7 +198,11 @@ extension OpenAI {
         var components = URLComponents()
         components.scheme = "https"
         components.host = configuration.host
-        components.path = path
+        if let prefix = configuration.pathPrefix {
+            components.path = prefix + path.replacingOccurrences(of: "/v1", with: "")
+        } else {
+            components.path = path
+        }
         return components.url!
     }
 }
