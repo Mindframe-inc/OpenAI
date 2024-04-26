@@ -32,6 +32,7 @@ final public class OpenAI: OpenAIProtocol {
             self.organizationIdentifier = organizationIdentifier
             self.host = host
             self.timeoutInterval = timeoutInterval
+            self.pathPrefix = pathPrefix
         }
     }
     
